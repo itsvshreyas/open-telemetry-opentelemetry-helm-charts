@@ -63,13 +63,14 @@ jobs:
 
       - name: Push charts to GHCR
         run: |
+          REPO_LOWER=$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
           shopt -s nullglob
           for pkg in .cr-release-packages/*; do
             if [ -z "${pkg:-}" ]; then
               break
             fi
-            echo "Pushing ${pkg} to oci://ghcr.io/${GITHUB_REPOSITORY}"
-            helm push "${pkg}" "oci://ghcr.io/${GITHUB_REPOSITORY}"
+            echo "Pushing ${pkg} to oci://ghcr.io/${REPO_LOWER}"
+            helm push "${pkg}" "oci://ghcr.io/${REPO_LOWER}"
           done
 
       - name: Fetch newly created tags
