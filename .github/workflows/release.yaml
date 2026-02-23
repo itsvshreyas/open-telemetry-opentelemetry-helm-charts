@@ -3,7 +3,7 @@ name: Release Charts
 on:
   push:
     branches:
-      - main
+      - bugfix/work-on-2082
 
 permissions:
   contents: read
